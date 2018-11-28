@@ -9,6 +9,7 @@ const spdy = require('spdy');
 const compression = require('compression');
 const fs = require('fs');
 const http = require('http');
+const cors = require('cors');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -16,6 +17,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const appExpress = express();
+  appExpress.use(cors());
   appExpress.use(compression());
 
   app.setAssetPrefix('');
@@ -24,10 +26,10 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    //if (req.hostname.match(/^www\..*/i)) {
-    //res.redirect('https://juangaspar.io');
-    //return;
-    //}
+    if (req.hostname.match(/^www\..*/i)) {
+      res.redirect('https://juangaspar.io');
+      return;
+    }
 
     if (pathname === '/') {
       app.render(req, res, dev ? '/dev' : '/pro', {}, parsedUrl);
