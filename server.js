@@ -24,10 +24,10 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (req.hostname.match(/^www\..*/i)) {
-      res.redirect('https://juangaspar.io');
-      return;
-    }
+    //if (req.hostname.match(/^www\..*/i)) {
+    //res.redirect('https://juangaspar.io');
+    //return;
+    //}
 
     if (pathname === '/') {
       app.render(req, res, dev ? '/dev' : '/pro', {}, parsedUrl);
