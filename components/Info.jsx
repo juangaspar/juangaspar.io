@@ -4,18 +4,6 @@ import { bindActionCreators } from 'redux';
 import { setLanguage } from '../store/index';
 
 class Info extends Component {
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll(event) {
-    console.log(window.scrollY);
-  }
-
   changeLanguage = () => {
     this.props.setLanguage(this.props.language == 'es' ? 'en' : 'es');
   };
@@ -28,7 +16,10 @@ class Info extends Component {
         <div className="infoPage">
           <div className="infoContainer">
             <div className="infoBig Left">{resources[language]['info1']}</div>
-            <div className="infoBig Right">{resources[language]['info2']}</div>
+            <div
+              className="infoBig Right"
+              dangerouslySetInnerHTML={{ __html: resources[language]['info2'] }}
+            />
             <div
               className="infoBig Left"
               dangerouslySetInnerHTML={{ __html: resources[language]['info3'] }}
@@ -38,11 +29,6 @@ class Info extends Component {
               dangerouslySetInnerHTML={{ __html: resources[language]['info4'] }}
             />
             <div className="infoBig Left">{resources[language]['info5']}</div>
-            <div
-              className="infoBig Right"
-              dangerouslySetInnerHTML={{ __html: resources[language]['info6'] }}
-            />
-            <div className="infoBig Left">{resources[language]['info7']}</div>
           </div>
         </div>
         <div onClick={this.changeLanguage} className="language">
@@ -124,4 +110,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Info);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Info);

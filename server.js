@@ -7,7 +7,6 @@ const { join } = require('path');
 const express = require('express');
 const spdy = require('spdy');
 const compression = require('compression');
-const createLocaleMiddleware = require('express-locale');
 const fs = require('fs');
 const http = require('http');
 
@@ -15,11 +14,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const localeMiddleware = createLocaleMiddleware();
-
 app.prepare().then(() => {
   const appExpress = express();
-  appExpress.use(localeMiddleware);
   appExpress.use(compression());
 
   app.setAssetPrefix('');
@@ -41,9 +37,6 @@ app.prepare().then(() => {
     ) {
       const filePath = join(__dirname, '.next', pathname);
       app.serveStatic(req, res, filePath);
-    } else if (pathname === '/amp.html') {
-      res.setHeader('content-type', 'text/html');
-      fs.createReadStream('./amp.html').pipe(res);
     } else {
       handle(req, res, parsedUrl);
     }
