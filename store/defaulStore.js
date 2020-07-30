@@ -17,7 +17,7 @@ const defaultStore = {
     },
     en: {
       info1:
-        "Hi, my name is Juan Gaspar, I'm developer and this is my personal web",
+        "Hi, my name is Juan Gaspar, I'm a developer and this is my personal web",
       info2:
         'I had intended to talk about my work experience, everything I\'ve done in the last 11 years, but I think it\'s boring to do so, so if you\'re interested you can check my <a href="https://www.linkedin.com/in/juan-gaspar-calvo-puga/" target="_blank">linkedin</a>',
       info3:
